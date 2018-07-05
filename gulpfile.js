@@ -41,6 +41,14 @@ gulp.task('clean', function(){
             .pipe(clean())
 });
 
-gulp.task('default', ['scripts', 'styles', 'images'], function(){
-    console.log('default task is done');
+gulp.task('serve', ['scripts', 'styles', 'images'], function(){
+    console.log('Build is done');
+});
+
+gulp.task('build', ['clean'], function(){
+    gulp.start('serve');
+});
+
+gulp.task('default', function(){
+    gulp.start('build');
 });
