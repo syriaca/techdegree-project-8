@@ -6,7 +6,8 @@ let gulp = require('gulp'),
     sass = require('gulp-sass'),
     cleanCSS = require('gulp-clean-css'),
     sourcemaps = require('gulp-sourcemaps'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    image = require('gulp-image');
 
 gulp.task('scripts', function(){
     return  gulp.src('js/**/*.js')
@@ -28,6 +29,12 @@ gulp.task('styles', function(){
             .pipe(gulp.dest('./dist/styles'))
 });
 
-gulp.task('default', ['scripts', 'styles'], function(){
+gulp.task('images', function(){
+    return  gulp.src('images/*')
+            .pipe(image())
+            .pipe(gulp.dest('./dist/content'))
+});
+
+gulp.task('default', ['scripts', 'styles', 'images'], function(){
     console.log('default task is done');
 });
