@@ -7,7 +7,8 @@ let gulp = require('gulp'),
     cleanCSS = require('gulp-clean-css'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
-    image = require('gulp-image');
+    image = require('gulp-image'),
+    clean = require('gulp-clean');
 
 gulp.task('scripts', function(){
     return  gulp.src('js/**/*.js')
@@ -33,6 +34,11 @@ gulp.task('images', function(){
     return  gulp.src('images/*')
             .pipe(image())
             .pipe(gulp.dest('./dist/content'))
+});
+
+gulp.task('clean', function(){
+    return  gulp.src('dist/*', {read: false})
+            .pipe(clean())
 });
 
 gulp.task('default', ['scripts', 'styles', 'images'], function(){
