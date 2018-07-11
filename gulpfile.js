@@ -8,7 +8,8 @@ let gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
     image = require('gulp-image'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    connect = require('gulp-connect');
 
 gulp.task('scripts', function(){
     return  gulp.src('js/**/*.js')
@@ -41,6 +42,15 @@ gulp.task('clean', function(){
             .pipe(clean())
 });
 
+gulp.task('connect', function() {
+    connect.server();
+});
+
+gulp.task('watchSass', function () {
+    gulp.watch(['sass/**/*.scss'], ['styles']);
+});
+
+
 gulp.task('serve', ['scripts', 'styles', 'images'], function(){
     console.log('Build is done');
 });
@@ -49,6 +59,6 @@ gulp.task('build', ['clean'], function(){
     gulp.start('serve');
 });
 
-gulp.task('default', function(){
+gulp.task('default', ['connect', 'watchSass'], function(){
     gulp.start('build');
 });
